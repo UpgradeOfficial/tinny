@@ -1,0 +1,12 @@
+{% extends 'shortener/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+<title>Register</title>
+{% endblock %}
+
+{% block content %}
+<form>
+	{{form|crispy}}
+	<input type="submit">
+</form>
+{% endblock %}

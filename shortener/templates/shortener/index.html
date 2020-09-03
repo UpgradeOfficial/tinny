@@ -1,0 +1,274 @@
+{% extends 'shortener/base.html' %}
+
+{% load staticfiles %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">Smaller Is Better In This Case</h1>
+    <p class="lead">Our major aim is to make your website more easily accessible, by providing simple and well contained links that are likable and memorable. Making it tinny is now a thing on the web and you should follow the trend. <strong>Coming Feature: Statistics and Social Authentication for a better experience</strong></p>
+    <p class="lead">
+      <!--<a href="#" class="btn btn-lg btn-secondary">Learn more</a>-->
+      <a href="#" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#exampleModal1">Try Now</a>
+      <a href="#" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#exampleModal2">Search</a>
+<a href="#" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#exampleModal3">Learn More</a>
+    </p>
+    <!--
+    <p>
+    	<a href="#" class="btn btn-sm btn-success">Google</a>
+    	<a href="#" class="btn btn-sm btn-success">Facebook</a>
+    </p> -->
+  </main>
+
+ 
+ 
+ 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: #b2beb5;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" >Urlise</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      	<form method="post" id="my_form">
+      	{% csrf_token %}
+      
+        {{u_form|crispy}}
+        <form>
+      </div>
+      <div id="urlizer-success-div">
+     
+      	
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="urlizer_button">Save</button>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: #b2beb5;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" >Search Modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      	<!-- Search form -->
+<div class="active-pink-3 active-pink-4 mb-4">
+  <input class="form-control" type="text" placeholder="Search for URL's and id's'" aria-label="Search" id="url-search">
+</div>
+<div id="url-search-result">
+	<ul class="list-group" style="background-color: black;" id="search-result-ul">
+  
+</ul>
+</div>
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true" style="background-color: #b2beb5;">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" >FAQ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      	<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Is tinny free?</h5>
+      
+    </div>
+    <p class="mb-1">It free and will continue to be</p>
+    
+  </a>
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">What is a valid URL</h5>
+      
+    </div>
+    <p class="mb-1">Good question. A valid URL comprises of a protocol(e.g https or http), a hostname(e.g example.com, example.ng e.t.c), path(/about). A complete URL would look like this https://www.example.com/about/</p>
+    
+  </a>
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">I am get errors when tinnifing my URL's</h5>
+      
+    </div>
+    <p class="mb-1">Could be for a number of reasons which may include:</p>
+    <ol>
+    	<li>All fields are not field out</li>
+    	<li>The URL is not in a correct format</li>
+    	<li>Unique Id field has a entry less than 5</li>
+    </ol>
+    
+  </a>
+</div>
+      </div>
+      <div id="urlizer-success-div">
+     
+      	
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="">Save</button>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script>
+	var myURL;
+         function validURL(myURL) {
+            var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+ // ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ //port
+            '(\\?[;&amp;a-z\\d%_.~+=-]*)?'+ // query string
+            '(\\#[-a-z\\d_]*)?$','i');
+            return pattern.test(myURL);
+         }
+         
+         
+	function makeid(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
+	$('#urlizer_button').click(function(event){
+		/*if ($("#id_unique_id").val().length<1){
+			$("#id_unique_id").val(makeid(8));
+		}*/
+		
+		var form = $('#my_form');
+		var data = form.serialize();
+		$("#urlizer_button").text("tinniying url");
+		$.ajax({
+        url: '{% url "home" %}',
+        type: 'POST',
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+        		$("#urlizer-success-div").prepend(' 	<div class="alert alert-success alert-dismissible">\
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\
+  <strong>Success!</strong>Your tinnified url is <strong>https:tinny.ml/'+data.id+'.\
+</strong></div>');
+
+	$("#urlizer_button").text("Save");
+        		
+        },
+        error: function(data){
+        			alert("Make sure all fields are filled out correctly!!!");
+        				$("#urlizer_button").text("Save");
+        }
+      });
+	
+ 	})
+ 	
+$("#url-search").on('keyup',function(event){
+	var val = $("#url-search").val();
+	if(val.length<=0){
+		$("#search-result-ul").empty();
+		throw 'empty';
+	}
+		$("#search-result-ul").text('searching...');
+		$.ajax({
+        url: '{% url "search" %}',
+        type: 'GET',
+        data: {"filter":val},
+        dataType: 'json',
+        success: function (json) {
+        	//alert(json);
+        	$("#search-result-ul").empty();
+        			for (var i = 0; i < json.length; i++) {
+                
+                $("#search-result-ul").prepend("<li class='list-group-item'>"+json[i].url+" id:"+json[i].unique_id+"</li>");
+            }
+        },
+        error: function(data){
+        			alert("Error");
+        }
+      });
+	
+})
+
+
+
+$("#id_unique_id").change(function(event){
+	var id=$("#id_unique_id").val();
+	if (id.length<=5){
+		alert('An ID will be automatically assigned or you could input one greater than 5 words');
+		throw 'Error' ;
+	}
+	
+	$.ajax({
+        url: '{% url "search_id" %}',
+        type: 'GET',
+        data: {"id":id},
+        dataType: 'json',
+        success: function (json) {
+        	if (json.available==true){
+        		alert('This ID is Available!!!');
+        	}else{
+        		alert('This ID is Unavailable!!!');
+        	}
+        	
+        	
+        },
+        error: function(data){
+        			alert("Error");
+        }
+      });
+})
+/*
+$("#id_url").change(function(event){
+	var val=$("#id_url").val();
+	var test = validURL(val);
+	alert(test);
+	if (validURL(val)){
+		alert("Correct Format");
+	}else{
+		alert("Url Not Valid. Check the format again");
+	}
+})*/
+</script>
+{% endblock %}
